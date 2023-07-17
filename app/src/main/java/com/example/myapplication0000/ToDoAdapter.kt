@@ -61,6 +61,7 @@ class TodosAdapter(val context: Context, private val list: List<Contacts>) :
     override fun getItemCount(): Int {
         return list.size
     }
+
     fun setOnUserClickedListener(listener: OnUserClickedListener) {
         this.listener = listener
     }
@@ -76,7 +77,7 @@ class TodosAdapter(val context: Context, private val list: List<Contacts>) :
     ) : BaseAdapter() {
         private val inflater = LayoutInflater.from(applicationContext)
         override fun getCount(): Int = flag.size
-        override fun getItem(position: Int): String =""
+        override fun getItem(position: Int): String = ""
         override fun getItemId(position: Int): Long = 0L
 
         @SuppressLint("ViewHolder", "InflateParams")
