@@ -24,7 +24,7 @@ class TodoListFragment : Fragment(R.layout.fragment_todo_list),
     private var childList: MutableList<MutableList<Contacts>> = ArrayList()
     private var openList: MutableList<Contacts> = ArrayList()
     private var developmentList: MutableList<Contacts> = ArrayList()
-    private var uploadingList: MutableList<Contacts> = ArrayList()
+    private var uploadList: MutableList<Contacts> = ArrayList()
     private var rejectList: MutableList<Contacts> = ArrayList()
     private var clossingList: MutableList<Contacts> = ArrayList()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,23 +45,21 @@ class TodoListFragment : Fragment(R.layout.fragment_todo_list),
         parentExpandableData()
         childList.add(openList)
         childList.add(developmentList)
-        childList.add(uploadingList)
+        childList.add(uploadList)
         childList.add(rejectList)
         childList.add(clossingList)
-
 
         val expandableAdapter = ExpandableAdapter(binding.root.context, parentList, childList)
         binding.expandableView.setAdapter(expandableAdapter)
         expandableAdapter.setOnClickChildItem(object : ExpandableAdapter.OnChildItemClickListener {
-            override fun onChildItemClick(childPosition: Int, parentPositon: Int) {
-                val childObject: Contacts = childList[parentPositon][childPosition]
+            override fun onChildItemClick(childPosition: Int, parentPosition: Int) {
+                val childObject: Contacts = childList[parentPosition][childPosition]
                 val bundle = Bundle()
-                bundle.putString("title", parentList[parentPositon].title)
+                bundle.putString("title", parentList[parentPosition].title)
                 bundle.putParcelable("childObj", childObject)
 
                 findNavController().navigate(R.id.action_todoList_to_informationScreen, bundle)
             }
-
         })
     }
 
@@ -72,8 +70,6 @@ class TodoListFragment : Fragment(R.layout.fragment_todo_list),
         parentList.add(ParentExpandable("Uploading"))
         parentList.add(ParentExpandable("Reject"))
         parentList.add(ParentExpandable("Clossing"))
-
-
     }
 
     override fun onUserClicked(position: Int) {
@@ -99,7 +95,7 @@ class TodoListFragment : Fragment(R.layout.fragment_todo_list),
                 }
 
                 R.id.sort_priority -> {
-                    Toast.makeText(context, "clicked sort by priority", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Clicked sort by priority", Toast.LENGTH_SHORT).show()
                     true
                 }
 

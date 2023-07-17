@@ -45,11 +45,9 @@ class CreateToDo : Fragment() {
         )
         val spinnerAdapter = SpinnerAdapter(requireContext(), img, name)
         binding.etDegree.adapter = spinnerAdapter
-
         binding.save.setOnClickListener {
             createTodos()
         }
-
         binding.etDeadline.setOnClickListener {
             showDatePicker()
         }
