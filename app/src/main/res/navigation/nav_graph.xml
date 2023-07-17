@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainscreen">
+
+    <fragment
+        android:id="@+id/mainscreen"
+        android:name="com.example.myapplication0000.fragments.MainScreen"
+        android:label="fragment_mainscreen"
+        tools:layout="@layout/fragment_mainscreen" >
+        <action
+            android:id="@+id/action_mainscreen_to_createTodo"
+            app:destination="@id/createTodo" />
+        <action
+            android:id="@+id/action_mainscreen_to_todoList"
+            app:destination="@id/todoList" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTodo"
+        android:name="com.example.myapplication0000.fragments.CreateToDo"
+        android:label="activity_create_contact"
+        tools:layout="@layout/fragment_create_todo" >
+        <action
+            android:id="@+id/action_createTodo_to_todoList"
+            app:destination="@id/todoList"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoList"
+        android:name="com.example.myapplication0000.fragments.TodoListFragment"
+        android:label="fragment_contact_list"
+        tools:layout="@layout/fragment_todo_list" >
+        <action
+            android:id="@+id/action_todoList_to_editData"
+            app:destination="@id/editData" />
+        <action
+            android:id="@+id/action_todoList_to_informationScreen"
+            app:destination="@id/informationScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/editData"
+        android:name="com.example.myapplication0000.fragments.EditData"
+        android:label="fragment_edit_data"
+        tools:layout="@layout/fragment_edit_data" >
+        <action
+            android:id="@+id/action_editData_to_todoList"
+            app:destination="@id/todoList" />
+        <argument
+            android:name="currentUsers"
+            app:argType="com.example.myapplication0000.room.Contacts" />
+    </fragment>
+    <fragment
+        android:id="@+id/informationScreen"
+        android:name="com.example.myapplication0000.fragments.InformationScreen"
+        android:label="fragment_information_screen"
+        tools:layout="@layout/fragment_information_screen" >
+        <action
+            android:id="@+id/action_informationScreen_to_todoList"
+            app:destination="@id/todoList" />
+    </fragment>
+</navigation>
