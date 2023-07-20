@@ -48,8 +48,8 @@ class EditData : Fragment() {
         // Set current contact data in EditText fields
         binding.etName.setText(getObject.name)
         binding.etDesciption.setText(getObject.description)
-        binding.etDate.text = getObject.date
-        binding.etDeadline.text = getObject.deadline
+        binding.etDate.setText(getObject.date)
+        binding.etDeadline.setText(getObject.deadline)
         val degrees = arrayOf("Urgent", "High", "Normal", "Low")
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, degrees)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -90,7 +90,7 @@ class EditData : Fragment() {
     private fun updateDeadlineInView() {
         val myFormat = "MM/dd/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        binding.etDeadline.text = sdf.format(cal.time)
+        binding.etDeadline.setText(sdf.format(cal.time))
     }
 
     private fun createTodo() {
@@ -116,7 +116,7 @@ class EditData : Fragment() {
             binding.etDeadline.error = "Deadline cannot be empty"
             return
         }
-        val data = Contacts(positionNumberID, name, description, degree, date, deadline)
+        val data = Contacts(positionNumberID, name, description, degree, date, deadline,"")
         viewModel.updateTodos(data)
         Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
         findNavController().popBackStack()

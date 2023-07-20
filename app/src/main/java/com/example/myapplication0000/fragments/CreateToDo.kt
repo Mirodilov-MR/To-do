@@ -48,6 +48,7 @@ class CreateToDo : Fragment() {
         binding.save.setOnClickListener {
             createTodos()
         }
+
         binding.etDeadline.setOnClickListener {
             showDatePicker()
         }
@@ -98,18 +99,13 @@ class CreateToDo : Fragment() {
             Toast.makeText(requireContext(), "Please select a degree", Toast.LENGTH_SHORT).show()
             return
         }
-
         val degree = degrees[selectedDegreePosition]
-
-
         val date = binding.etDate.text.toString().trim()
         val deadline = binding.etDeadline.text.toString().trim()
-
-        val data = Contacts(null, name, description, degree, date, deadline)
+        val data = Contacts(null, name, description, degree, date, deadline,"open")
         viewModel.addTodos(data)
 
         Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
         findNavController().popBackStack()
     }
-
 }

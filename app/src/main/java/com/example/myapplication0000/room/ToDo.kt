@@ -14,6 +14,7 @@ data class Contacts(
     var description: String,
     var degree: String,
     var date: String,
-    var deadline: String
+    var deadline: String,
+    var category: String
 ) : Parcelable
 

@@ -33,30 +33,16 @@ class TodosAdapter(val context: Context, private val list: List<Contacts>) :
         holder.binding.contactName.text = todo.name
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
+            editTodo(todo)
             bundle.putParcelable("position_id", todo)
             holder.itemView.findNavController()
                 .navigate(R.id.action_todoList_to_informationScreen, bundle)
-        }
-//        holder.binding.btnDelete.setOnClickListener {
-//            dao.delete(list[position])
-//            notifyItemRemoved(position)
-//        }
-//        holder.binding.btnEdit.setOnClickListener {
-//            updateMovie(movie)
-//            val bundle = Bundle()
-//            bundle.putParcelable("position_id", movie)
-//            holder.itemView.findNavController()
-//                .navigate(R.id.action_mainScreen_to_editScreen, bundle)
-//            true
-//        }
-    }
-//    private fun deleteTodo(todo: Contacts, position: Int) {
-//        dao.delete(todo)
-//        notifyItemRemoved(position)}
 
-//    private fun editTodo(todo: Contacts) {
-//        dao.update(todo)
-//    }
+        }
+    }
+        private fun editTodo(todo: Contacts) {
+        dao.update(todo)
+    }
 
     override fun getItemCount(): Int {
         return list.size
@@ -64,7 +50,6 @@ class TodosAdapter(val context: Context, private val list: List<Contacts>) :
     fun setOnUserClickedListener(listener: OnUserClickedListener) {
         this.listener = listener
     }
-
     interface OnUserClickedListener {
         fun onUserClicked(position: Int)
     }
@@ -78,7 +63,6 @@ class TodosAdapter(val context: Context, private val list: List<Contacts>) :
         override fun getCount(): Int = flag.size
         override fun getItem(position: Int): String =""
         override fun getItemId(position: Int): Long = 0L
-
         @SuppressLint("ViewHolder", "InflateParams")
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val cv = inflater.inflate(R.layout.layout_item_spinner, null)

@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isInvisible
 import com.example.myapplication0000.R
-import com.example.myapplication0000.model.ChildExpandable
 import com.example.myapplication0000.model.ParentExpandable
 import com.example.myapplication0000.room.Contacts
 
@@ -20,8 +17,6 @@ class ExpandableAdapter(
 ) : BaseExpandableListAdapter() {
 
     private var listener: OnChildItemClickListener? = null
-
-
     override fun getGroupCount(): Int {
         return parentList.size
     }
@@ -81,25 +76,18 @@ class ExpandableAdapter(
             val inflater: LayoutInflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             childView = inflater.inflate(R.layout.child_expandable_row, null)
-
         }
-
-
         val childTitle = childView?.findViewById<TextView>(R.id.childTitle)
         childTitle?.text = childList[groupPosition][childPosition].name
-
-
         childView?.setOnClickListener {
-            listener?.onChildItemClick( childPosition,groupPosition)
+            listener?.onChildItemClick(childPosition, groupPosition)
         }
-
         return childView!!
     }
 
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean {
         return true
     }
-
 
     fun setOnClickChildItem(listener: OnChildItemClickListener) {
         this.listener = listener

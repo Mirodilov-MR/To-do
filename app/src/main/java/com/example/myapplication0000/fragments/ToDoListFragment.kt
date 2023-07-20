@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication0000.R
 import com.example.myapplication0000.TodosAdapter
 import com.example.myapplication0000.adapter.ExpandableAdapter
@@ -15,8 +14,7 @@ import com.example.myapplication0000.databinding.FragmentTodoListBinding
 import com.example.myapplication0000.model.ParentExpandable
 import com.example.myapplication0000.room.Contacts
 
-class TodoListFragment : Fragment(R.layout.fragment_todo_list),
-    TodosAdapter.OnUserClickedListener {
+class TodoListFragment : Fragment(R.layout.fragment_todo_list), TodosAdapter.OnUserClickedListener {
     private lateinit var binding: FragmentTodoListBinding
     private val viewModel: ToDoViewModel by viewModels()
     private lateinit var rvAdapter: TodosAdapter
@@ -31,9 +29,6 @@ class TodoListFragment : Fragment(R.layout.fragment_todo_list),
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTodoListBinding.bind(view)
 
-        binding.sortBtn.setOnClickListener {
-            showPopupMenu()
-        }
 
         viewModel.getAllTodos().observe(viewLifecycleOwner) { list ->
             openList = list as MutableList<Contacts>
@@ -56,7 +51,7 @@ class TodoListFragment : Fragment(R.layout.fragment_todo_list),
                 val childObject: Contacts = childList[parentPosition][childPosition]
                 val bundle = Bundle()
                 bundle.putString("title", parentList[parentPosition].title)
-                bundle.putParcelable("childObj", childObject)
+                bundle.putParcelable("position_id", childObject)
 
                 findNavController().navigate(R.id.action_todoList_to_informationScreen, bundle)
             }
@@ -69,40 +64,10 @@ class TodoListFragment : Fragment(R.layout.fragment_todo_list),
         parentList.add(ParentExpandable("Development"))
         parentList.add(ParentExpandable("Uploading"))
         parentList.add(ParentExpandable("Reject"))
-        parentList.add(ParentExpandable("Clossing"))
+        parentList.add(ParentExpandable("Closing"))
     }
 
     override fun onUserClicked(position: Int) {
-        showPopupMenu()
     }
 
-    private fun showPopupMenu() {
-        val context = requireContext()
-        val popupMenu = PopupMenu(context, binding.sortBtn)
-        popupMenu.inflate(R.menu.popup_menu)
-        popupMenu.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.sort_create_date -> {
-                    Toast.makeText(context, "Clicked sort by created date", Toast.LENGTH_SHORT)
-                        .show()
-                    true
-                }
-
-                R.id.sort_deadline_date -> {
-                    Toast.makeText(context, "Clicked sort by deadline date", Toast.LENGTH_SHORT)
-                        .show()
-                    true
-                }
-
-                R.id.sort_priority -> {
-                    Toast.makeText(context, "Clicked sort by priority", Toast.LENGTH_SHORT).show()
-                    true
-                }
-
-                else -> false
-            }
-        }
-
-        popupMenu.show()
-    }
 }
